@@ -31,6 +31,8 @@ const metubeLiveUrl = 'https://www.metube.id/live';
     {
         await page.goto(element.url);
         
+        element.logo = await page.evaluate(() => document.querySelector("meta[property='og:image']").content);
+        
         let bodyHTML = await page.evaluate(() => document.body.innerHTML);
         
         let re = /(http.*?\.m3u8)/g;
