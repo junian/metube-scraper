@@ -15,12 +15,41 @@ const metubeLiveUrl = 'https://www.metube.id/live';
             {
                 title: element.querySelector("a").title,
                 url: element.querySelector("a").href,
-                logo: element.querySelector('img').src
+                logo: element.querySelector('img').src,
+                tvUrl: '',
+                error: false
             });
       });
       
       return result;
   });
-  console.log(data);
+
+  for(let i=0;i<data.length;i++){
+    let element = data[i];
+    // console.log(element.url);
+    try
+    {
+        await page.goto(element.url);
+        
+        let bodyHTML = await page.evaluate(() => document.body.innerHTML);
+        
+        let re = /(http.*?\.m3u8)/g;
+        let myArray = re.exec(bodyHTML);
+        element.tvUrl = myArray[1];
+    }
+    catch(err){
+        element.error = true;
+    }
+  };
+
+  console.log('#EXTM3U');
+  for(let i=0;i<data.length;i++){
+     let element = data[i];
+     if(element.error === true)
+        continue;
+      console.log('');
+      console.log('#EXTINF:-1 tvg-logo="' + element.logo + '",' + element.title);
+      console.log(element.tvUrl);
+  };
   await browser.close();
 })();
