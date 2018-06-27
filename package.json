@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/junian/metube-scraper",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^1.5.0"
+  }
 }
