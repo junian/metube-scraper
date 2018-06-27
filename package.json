@@ -1,0 +1,7 @@
+{
+  "name": "metube-scraper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/junian/metube-scraper",
+  "license": "MIT"
+}
